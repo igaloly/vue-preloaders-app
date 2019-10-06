@@ -1,0 +1,10 @@
+@mixin breakpoint-desktop(){
+    @media (min-width: $breakpoint + 0.05) {
+        @content;
+    }
+}
+@mixin breakpoint-mobile(){
+    @media (max-width: $breakpoint) {
+        @content;
+    }
+}

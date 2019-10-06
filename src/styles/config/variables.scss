@@ -1,0 +1,41 @@
+$colors: (
+  alpha: #acecf7,
+  beta: #ebd2b4,
+  gamma: #f4989c,
+  delta: #dac4f7,
+  epsilon: #d6f6dd
+);
+
+$transition-duration: 300ms;
+$transition-timing-function: ease;
+$transition: $transition-duration $transition-timing-function;
+
+$breakpoint: 1000px;
+
+$font-1: 12px;
+$font-2: 16px;
+$font-3: 22px;
+$font-4: 28px;
+$font-5: 50px;
+
+$spacing-1: 5px;
+$spacing-2: 10px;
+$spacing-3: 15px;
+$spacing-4: 20px;
+$spacing-5: 25px;
+$spacing-container: $spacing-5;
+
+$icon-size: 15px;
+$icon-padding: $icon-size * 0.5;
+
+:export {
+  color: {
+    @each $name, $value in $colors {
+      #{$name}: $value;
+    }
+  };
+  transition: {
+    duration: $transition-duration;
+    timing-function: $transition-timing-function;
+  }
+}
