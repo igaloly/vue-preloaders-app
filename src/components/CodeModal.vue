@@ -114,6 +114,7 @@ export default {
   display: flex;
   justify-content: center;
   will-change: background-color;
+  z-index: 1;
 }
 
 .modal-container {

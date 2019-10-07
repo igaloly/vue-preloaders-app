@@ -1,49 +1,78 @@
 <template>
   <div id="app">
-    <Card
-      v-for="(card, index) in cards"
-      :key="index"
-      v-bind="card"
-      @codeModalButtonClick="$refs.codeModal.open({ ...card, openerElement: $event })"
-      ref="cards"
-    />
+    <div class="card-container" v-for="(card, index) in cards" :key="index">
+      <div class="card-wrapper">
+        <Card
+          v-bind="card"
+          @codeModalButtonClick="$refs.codeModal.open({ ...card, openerElement: $event })"
+          ref="cards"
+        />
+      </div>
+    </div>
     <CodeModal ref="codeModal" />
   </div>
 </template>
 
 <script>
-import colors from './styles/config/variables.scss';
-import CodeModal from './components/CodeModal.vue';
-import Card from './components/Card.vue';
-import Squares from './components/preloaders/Squares.vue';
-import SquaresContent from '!!raw-loader!./components/preloaders/Squares.vue';
+import colors from "./styles/config/variables.scss";
+import CodeModal from "./components/CodeModal.vue";
+import Card from "./components/Card.vue";
+import Squares from "./components/preloaders/Squares.vue";
+import SquaresContent from "!!raw-loader!./components/preloaders/Squares.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: { Card, CodeModal },
   computed: {
     cards() {
       return [
         {
           id: 1,
-          loader: {
+          loaderData: {
             component: Squares,
             overlayStyle: {
-              backgroundColor: colors['color-alpha'],
-            },
+              backgroundColor: colors["color-alpha"]
+            }
           },
-          componentSource: SquaresContent,
-        },
+          componentSource: SquaresContent
+        }
       ];
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@include breakpoint-desktop {
-  .card {
-    width: 300px;
-  }
+.card-container {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
 }
+.card-wrapper,
+.card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.card-wrapper {
+  padding-top: 100%;
+}
+.card {
+  height: 100%;
+}
+// @include breakpoint-desktop {
+//   .card {
+//     $size: 350px;
+//     width: $size;
+//     height: $size;
+//   }
+// }
+// @include breakpoint-mobile {
+//   .card {
+//     $size: 250px;
+//     width: $size;
+//     height: $size;
+//   }
+// }
 </style>
