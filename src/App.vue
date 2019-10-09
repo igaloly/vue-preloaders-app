@@ -1,14 +1,12 @@
 <template>
   <div id="app">
-    <div class="card-container" v-for="(card, index) in cards" :key="index">
-      <div class="card-wrapper">
-        <Card
-          v-bind="card"
-          @codeModalButtonClick="$refs.codeModal.open({ ...card, openerElement: $event })"
-          ref="cards"
-        />
-      </div>
-    </div>
+    <Card
+      v-for="(card, index) in cards"
+      :key="index"
+      v-bind="card"
+      @codeModalButtonClick="$refs.codeModal.open({ ...card, openerElement: $event })"
+      ref="cards"
+    />
     <CodeModal ref="codeModal" />
   </div>
 </template>
@@ -43,36 +41,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-container {
-  position: relative;
-  width: 100%;
-  max-width: 350px;
-}
-.card-wrapper,
 .card {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  max-width: 250px;
 }
-.card-wrapper {
-  padding-top: 100%;
-}
-.card {
-  height: 100%;
-}
-// @include breakpoint-desktop {
-//   .card {
-//     $size: 350px;
-//     width: $size;
-//     height: $size;
-//   }
-// }
-// @include breakpoint-mobile {
-//   .card {
-//     $size: 250px;
-//     width: $size;
-//     height: $size;
-//   }
-// }
 </style>

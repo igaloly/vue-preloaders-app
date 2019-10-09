@@ -53,7 +53,7 @@ export default {
     };
   },
   methods: {
-    open({ componentSource, loader, openerElement }) {
+    open({ componentSource, loaderData: loader, openerElement }) {
       if (!openerElement) return;
 
       this.openerElement = openerElement;
@@ -114,7 +114,7 @@ export default {
   display: flex;
   justify-content: center;
   will-change: background-color;
-  z-index: 1;
+  z-index: 2;
 }
 
 .modal-container {
