@@ -13,6 +13,15 @@
             </button>
           </div>
           <div class="content">
+            <div class="credit" v-if="credit">
+              Credit:
+              <a
+                class="credit-url"
+                :href="credit.url"
+                rel="noopener"
+                target="_blank"
+              >{{credit.text}}</a>
+            </div>
             <SourceContent
               class="source"
               v-for="(code, index) in [loaderSource, componentSource]"
@@ -46,6 +55,7 @@ export default {
       openerElement: {},
       componentSource: '',
       loaderSource: '',
+      credit: '',
       ...initValues,
       backgroundOpacity: 0,
       pointerEvents: 'none',
@@ -53,7 +63,9 @@ export default {
     };
   },
   methods: {
-    open({ componentSource, loaderData: loader, openerElement }) {
+    open({
+      credit, componentSource, loaderData: loader, openerElement,
+    }) {
       if (!openerElement) return;
 
       this.openerElement = openerElement;
@@ -61,6 +73,8 @@ export default {
       this.loaderSource = { ...loader };
       if (this.loaderSource.component) this.loaderSource.component = this.loaderSource.component.name;
       this.loaderSource = JSON.stringify(this.loaderSource, null, 2);
+      this.credit = credit;
+
       this.$el.scroll(0, 0);
 
       this.$nextTick(() => {
@@ -114,7 +128,7 @@ export default {
   display: flex;
   justify-content: center;
   will-change: background-color;
-  z-index: 2;
+  z-index: 3;
 }
 
 .modal-container {
@@ -151,9 +165,22 @@ export default {
 .content {
   padding: 0 $spacing-container $spacing-container $spacing-container;
 }
+.credit {
+  margin-bottom: $spacing-3;
+}
+.credit-url {
+  text-decoration: underline;
+}
 .source {
   &:not(:last-child) {
     margin-bottom: $spacing-3;
+  }
+}
+
+@include breakpoint-mobile {
+  .credit,
+  .source {
+    font-size: $font-1;
   }
 }
 </style>

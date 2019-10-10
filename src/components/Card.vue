@@ -39,61 +39,63 @@
 </template>
 
 <script>
-import Code from "./icons/Code.vue";
-import Expand from "./icons/Expand.vue";
-import Cross from "./icons/Cross.vue";
-import consts from "../styles/config/index.scss";
+import Code from './icons/Code.vue';
+import Expand from './icons/Expand.vue';
+import Cross from './icons/Cross.vue';
+import consts from '../styles/config/index.scss';
 
 const loaderStyle = {
-  position: "",
-  top: "",
-  right: "",
-  width: "",
-  height: "",
-  borderRadius: "",
-  paddingTop: "",
-  transition: ""
+  position: '',
+  top: '',
+  right: '',
+  width: '',
+  height: '',
+  borderRadius: '',
+  paddingTop: '',
+  transition: '',
+};
+const contentStyle = {
+  top: '',
+  left: '',
+  position: '',
+  width: '',
+  height: '',
+  transition: '',
+  zIndex: '',
 };
 
 export default {
-  name: "Card",
+  name: 'Card',
   components: {
     Cross,
     Expand,
-    Code
+    Code,
   },
   props: {
     loaderData: {
       type: Object,
-      required: false
+      required: false,
     },
     componentSource: {
       type: String,
-      default: ""
-    }
+      default: '',
+    },
   },
   data() {
     return {
       cardStyle: {
-        borderRadius: ""
+        borderRadius: '',
       },
       content: {
         isExpanded: false,
-        style: {
-          top: "",
-          left: "",
-          position: "",
-          width: "",
-          height: "",
-          transition: ""
-        }
+        style: { ...contentStyle },
       },
       loader: {
         isExpanded: false,
         timeoutId: null,
-        style: { ...loaderStyle }
+        style: { ...loaderStyle },
       },
-      transitionDuration: parseInt(consts["transition-duration"])
+      transitionDuration: parseInt(consts['transition-duration']),
     };
   },
   methods: {
@@ -110,21 +112,22 @@ export default {
         left: `${rect.left}px`,
         width: `${rect.width}px`,
         height: `${rect.height}px`,
-        position: "fixed"
+        position: 'fixed',
+        zIndex: 3,
       });
       setTimeout(() => {
         this.content.style = Object.assign(this.content.style, {
           transition: `top ${this.transitionDuration}ms, left ${this.transitionDuration}ms`,
           left: `${window.innerWidth / 2 - rect.width / 2}px`,
-          top: `${window.innerHeight / 2 - rect.height / 2}px`
+          top: `${window.innerHeight / 2 - rect.height / 2}px`,
         });
         setTimeout(() => {
           this.content.style = Object.assign(this.content.style, {
             transition: `width ${this.transitionDuration}ms, height ${this.transitionDuration}ms, top ${this.transitionDuration}ms, left ${this.transitionDuration}ms`,
             top: `${0}px`,
             left: `${0}px`,
-            width: "100%",
-            height: "100%"
+            width: '100%',
+            height: '100%',
           });
           this.cardStyle.borderRadius = 0;
           setTimeout(() => {
@@ -140,22 +143,15 @@ export default {
 
       this.content.isExpanded = false;
 
-      this.cardStyle.borderRadius = "";
+      this.cardStyle.borderRadius = '';
       this.content.style = Object.assign(this.content.style, {
         top: `${rect.top}px`,
         left: `${rect.left}px`,
         width: `${rect.width}px`,
-        height: `${rect.height}px`
+        height: `${rect.height}px`,
       });
       setTimeout(() => {
-        this.content.style = Object.assign(this.content.style, {
-          position: "relative",
-          top: "",
-          left: "",
-          width: "",
-          height: "",
-          transition: ""
-        });
+        this.content.style = Object.assign(this.content.style, contentStyle);
         setTimeout(() => {
           this.loaderContract();
         }, 50);
@@ -171,11 +167,11 @@ export default {
       setTimeout(() => {
         this.loader.style = Object.assign(this.loader.style, {
           transition: `top ${this.transitionDuration}ms, right ${this.transitionDuration}ms, width ${this.transitionDuration}ms, height ${this.transitionDuration}ms, border-radius ${this.transitionDuration}ms`,
-          top: `0`,
-          right: `0`,
-          width: `100%`,
-          height: `100%`,
-          borderRadius: "0"
+          top: '0',
+          right: '0',
+          width: '100%',
+          height: '100%',
+          borderRadius: '0',
         });
         setTimeout(() => {
           this.loader.timeoutId = setTimeout(() => {
@@ -201,26 +197,26 @@ export default {
       const loaderSpaceSaverRect = this.$refs.loaderSpaceSaver.getBoundingClientRect();
 
       this.loader.style = Object.assign(this.loader.style, {
-        position: "absolute",
+        position: 'absolute',
         top: `${loaderRect.top - contentRect.top}px`,
         right: `${contentRect.right - loaderRect.right}px`,
         width: `${loaderSpaceSaverRect.width}px`,
         height: `${loaderSpaceSaverRect.height}px`,
-        paddingTop: 0
+        paddingTop: 0,
       });
     },
     clearLoaderTimeoutId() {
       if (this.loader.timeoutId) {
         clearTimeout(this.loader.timeoutId);
       }
-    }
+    },
   },
   mounted() {
     this.$preloaders.open({
       ...this.loaderData,
-      container: this.$refs.loaderHolder
+      container: this.$refs.loaderHolder,
     });
-  }
+  },
 };
 </script>
 

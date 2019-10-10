@@ -56,12 +56,7 @@ export default {
   display: flex;
   align-items: center;
 }
-.button {
-  padding: $spacing-3;
-}
-.copy {
-  height: $icon-size * 2;
-}
+
 .code {
   word-break: break-word;
   white-space: pre-wrap;
@@ -79,6 +74,23 @@ export default {
   &:not(.visible) {
     transform: translateX(10%);
     opacity: 0;
+  }
+}
+
+@include breakpoint-desktop {
+  .button {
+    padding: $spacing-3;
+  }
+  .copy {
+    height: $icon-size * 2;
+  }
+}
+@include breakpoint-mobile {
+  .button {
+    padding: $spacing-2;
+  }
+  .copy {
+    height: $icon-size * 1.25;
   }
 }
 </style>
