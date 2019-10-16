@@ -5,17 +5,22 @@
         <div class="content-wrapper" ref="contentWrapper">
           <div class="content" :style="content.style" ref="content">
             <div class="loader" ref="loader">
-              <button
+              <a
+                href="javascript:;"
                 class="loader-button"
                 @click="loaderExpand"
                 :style="loader.style"
                 ref="loaderButton"
               >
                 <span class="loader-holder" ref="loaderHolder"></span>
-              </button>
-              <div class="loader-space-saver" ref="loaderSpaceSaver"></div>
+              </a>
             </div>
-            <div class="toolbar">
+            <div class="loader-space-saver-container">
+              <div class="loader-space-saver-wrapper">
+                <div class="loader-space-saver" ref="loaderSpaceSaver"></div>
+              </div>
+            </div>
+            <div class="toolbar" :style="toolbarStyle">
               <button class="close" @click="contentContract">
                 <Cross />
               </button>
@@ -44,6 +49,9 @@ import Expand from './icons/Expand.vue';
 import Cross from './icons/Cross.vue';
 import consts from '../styles/config/index.scss';
 
+const cardStyle = {
+  borderRadius: '',
+};
 const loaderStyle = {
   position: '',
   top: '',
@@ -63,6 +71,9 @@ const contentStyle = {
   transition: '',
   zIndex: '',
 };
+const toolbarStyle = {
+  fill: '',
+};
 
 export default {
   name: 'Card',
@@ -74,18 +85,19 @@ export default {
   props: {
     loaderData: {
       type: Object,
-      required: false,
+      required: true,
     },
-    componentSource: {
+    whiteToolbar: {
+      type: Boolean,
+    },
+    types: {
       type: String,
       default: '',
     },
   },
   data() {
     return {
-      cardStyle: {
-        borderRadius: '',
-      },
+      cardStyle: { ...cardStyle },
       content: {
         isExpanded: false,
         style: { ...contentStyle },
@@ -95,6 +107,7 @@ export default {
         timeoutId: null,
         style: { ...loaderStyle },
       },
+      toolbarStyle: { ...toolbarStyle },
       transitionDuration: parseInt(consts['transition-duration']),
     };
   },
@@ -132,7 +145,7 @@ export default {
           this.cardStyle.borderRadius = 0;
           setTimeout(() => {
             this.loaderExpand();
-          }, this.transitionDuration * 1.25);
+          }, this.transitionDuration);
         }, this.transitionDuration);
       }, 30);
     },
@@ -143,7 +156,7 @@ export default {
 
       this.content.isExpanded = false;
 
-      this.cardStyle.borderRadius = '';
+      this.cardStyle = Object.assign(this.cardStyle, cardStyle);
       this.content.style = Object.assign(this.content.style, {
         top: `${rect.top}px`,
         left: `${rect.left}px`,
@@ -159,12 +172,12 @@ export default {
     },
     loaderExpand() {
       this.clearLoaderTimeoutId();
-      if (this.loader.isExpanded) return;
+      if (!this.loader.isExpanded) this.loaderSetBasePosition();
 
-      this.loaderSetBasePosition();
       this.loader.isExpanded = true;
 
       setTimeout(() => {
+        if (this.whiteToolbar) this.toolbarStyle.fill = 'white';
         this.loader.style = Object.assign(this.loader.style, {
           transition: `top ${this.transitionDuration}ms, right ${this.transitionDuration}ms, width ${this.transitionDuration}ms, height ${this.transitionDuration}ms, border-radius ${this.transitionDuration}ms`,
           top: '0',
@@ -187,19 +200,19 @@ export default {
 
       this.loaderSetBasePosition();
 
+      this.toolbarStyle = Object.assign(this.toolbarStyle, toolbarStyle);
       setTimeout(() => {
         this.loader.style = Object.assign(this.loader.style, loaderStyle);
       }, this.transitionDuration);
     },
     loaderSetBasePosition() {
       const contentRect = this.$refs.content.getBoundingClientRect();
-      const loaderRect = this.$refs.loader.getBoundingClientRect();
       const loaderSpaceSaverRect = this.$refs.loaderSpaceSaver.getBoundingClientRect();
 
       this.loader.style = Object.assign(this.loader.style, {
         position: 'absolute',
-        top: `${loaderRect.top - contentRect.top}px`,
-        right: `${contentRect.right - loaderRect.right}px`,
+        top: `${loaderSpaceSaverRect.top - contentRect.top}px`,
+        right: `${contentRect.right - loaderSpaceSaverRect.right}px`,
         width: `${loaderSpaceSaverRect.width}px`,
         height: `${loaderSpaceSaverRect.height}px`,
         paddingTop: 0,
@@ -280,18 +293,25 @@ $width: calc(100% - #{$left});
   align-items: flex-start;
 }
 
-.loader {
-  $spacing: $spacing-2;
-  margin-top: $spacing;
-  margin-right: $spacing;
-  margin-left: auto;
-  width: 30%;
-  max-width: 100px;
+.loader,
+.loader-space-saver-wrapper {
+  margin: auto;
+  width: 50%;
+  max-width: 500px;
 }
-.loader-space-saver,
-.loader-button {
+.loader-space-saver-container {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  padding-top: 150%;
+  height: 100%;
+  display: flex;
+}
+.loader-button,
+.loader-space-saver {
+  display: block;
+  width: 100%;
+  padding-top: 100%;
   position: relative;
   border-radius: 5px;
 }
@@ -311,10 +331,12 @@ $width: calc(100% - #{$left});
   top: 0;
   left: 0;
   display: flex;
+  transition: fill $transition;
   > * {
     padding: $icon-padding;
     > * {
       height: $icon-size;
+      width: $icon-size;
     }
   }
 

@@ -28,13 +28,19 @@ export default {
     };
   },
   methods: {
+    toggleCopyLabel() {
+      this.isCopied = true;
+      setTimeout(() => {
+        this.isCopied = false;
+      }, 1000);
+    },
     copyCode() {
-      navigator.clipboard.writeText(this.code).then(() => {
-        this.isCopied = true;
-        setTimeout(() => {
-          this.isCopied = false;
-        }, 1000);
-      });
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(this.code).then(this.toggleCopyLabel);
+      } else {
+        window.clipboardData.setData('Text', this.code);
+        this.toggleCopyLabel();
+      }
     },
   },
 };
@@ -83,6 +89,7 @@ export default {
   }
   .copy {
     height: $icon-size * 2;
+    width: $icon-size * 2;
   }
 }
 @include breakpoint-mobile {
@@ -91,6 +98,7 @@ export default {
   }
   .copy {
     height: $icon-size * 1.25;
+    width: $icon-size * 1.25;
   }
 }
 </style>

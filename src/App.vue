@@ -4,7 +4,9 @@
       <Card
         v-for="(card, index) in cards"
         :key="index"
-        v-bind="card"
+        :loader-data="card.loaderData"
+        :white-toolbar="card.darkBackground"
+        :types="card.types"
         @codeModalButtonClick="$refs.codeModal.open({ ...card, openerElement: $event })"
         ref="cards"
       />
@@ -14,100 +16,320 @@
 </template>
 
 <script>
-import colors from './styles/config/variables.scss';
-import CodeModal from './components/CodeModal';
-import Card from './components/Card';
-import Squares from './components/preloaders/Squares';
-import SquaresContent from '!!raw-loader!./components/preloaders/Squares';
-import Slack from './components/preloaders/Slack';
-import SlackContent from '!!raw-loader!./components/preloaders/Slack';
-import Flat from './components/preloaders/Flat';
-import FlatContent from '!!raw-loader!./components/preloaders/Flat';
-import Hexagon from './components/preloaders/Hexagon';
-import HexagonContent from '!!raw-loader!./components/preloaders/Hexagon';
-import Plug from './components/preloaders/Plug';
-import PlugContent from '!!raw-loader!./components/preloaders/Plug';
+import colors from "./styles/config/variables.scss";
+import CodeModal from "./components/CodeModal";
+import Card from "./components/Card";
+import Slack from "./components/preloaders/Slack";
+import Hexagon from "./components/preloaders/Hexagon";
+import Rainbow from "./components/preloaders/Rainbow";
+import SqaureFill from "./components/preloaders/SquareFill";
+import Infinite from "./components/preloaders/Infinite";
+import Danger from "./components/preloaders/Danger";
+
+const types = {
+  asset: "Asset",
+  component: "Component",
+  text: "Text",
+  html: "Html"
+};
 
 export default {
-  name: 'app',
+  name: "app",
   components: { Card, CodeModal },
   computed: {
     cards() {
-      return [
+      const cards = [
         {
           loaderData: {
-            component: Squares,
+            component: require("./components/preloaders/Squares").default,
             overlayStyle: {
-              backgroundColor: colors['color-alpha'],
-            },
+              backgroundColor: colors["color-alpha"]
+            }
           },
-          componentSource: SquaresContent,
+          componentSource: require("!!raw-loader!./components/preloaders/Squares")
+            .default
         },
         {
           loaderData: {
-            component: Slack,
+            component: require("./components/preloaders/Slack").default,
             overlayStyle: {
-              backgroundColor: '#ffffff',
-            },
+              backgroundColor: "#ffffff"
+            }
           },
-          componentSource: SlackContent,
           credit: {
-            text: 'GlitchWorker',
-            url: 'https://codepen.io/glitchworker/pen/mVgogz',
+            text: "GlitchWorker",
+            url: "https://codepen.io/glitchworker/pen/mVgogz"
+          },
+          componentSource: require("!!raw-loader!./components/preloaders/Slack")
+            .default
+        },
+        {
+          loaderData: {
+            component: require("./components/preloaders/Hexagon").default,
+            overlayStyle: {
+              backgroundColor: "#ECF0F1"
+            }
+          },
+          credit: {
+            text: "Roland Lösslein",
+            url: "https://codepen.io/weaintplastic/pen/qEMZbx"
+          },
+          componentSource: require("!!raw-loader!./components/preloaders/Hexagon")
+            .default
+        },
+        {
+          loaderData: {
+            component: require("./components/preloaders/Infinite").default,
+            overlayStyle: {
+              background:
+                "radial-gradient(circle farthest-corner at center,#3c4b57 0%,#1c262b 100%)",
+              opacity: 1
+            }
+          },
+          credit: {
+            text: "Martin van Driel",
+            url: "https://codepen.io/martinvd/pen/xbQJom"
+          },
+          componentSource: require("!!raw-loader!./components/preloaders/Infinite")
+            .default,
+          darkBackground: true
+        },
+        {
+          loaderData: {
+            component: require("./components/preloaders/Rainbow").default,
+            overlayStyle: {
+              background: "radial-gradient(#222, #000)",
+              opacity: 0.9
+            }
+          },
+          credit: {
+            text: "Jack Rugile",
+            url: "https://codepen.io/jackrugile/pen/JddmaX"
+          },
+          componentSource: require("!!raw-loader!./components/preloaders/Rainbow")
+            .default,
+          darkBackground: true
+        },
+        {
+          loaderData: {
+            component: require("./components/preloaders/SquareFill").default,
+            overlayStyle: {
+              backgroundColor: "#242F3F",
+              opacity: 1
+            }
+          },
+          credit: {
+            text: "Tashfeen",
+            url: "https://codepen.io/tashfene/pen/raEqrJ"
+          },
+          componentSource: require("!!raw-loader!./components/preloaders/SquareFill")
+            .default,
+          darkBackground: true
+        },
+        {
+          loaderData: {
+            component: require("./components/preloaders/Danger").default,
+            overlayStyle: {
+              backgroundColor: "#090707",
+              opacity: 1
+            }
+          },
+          credit: {
+            text: "James Panter",
+            url: "https://codepen.io/jpanter/pen/PWWQXK"
+          },
+          componentSource: require("!!raw-loader!./components/preloaders/Danger")
+            .default,
+          darkBackground: true
+        },
+        {
+          loaderData: {
+            assetSrc: "https://i.giphy.com/media/TvLuZ00OIADoQ/giphy.webp",
+            overlayStyle: {
+              backgroundColor: "#1874d2",
+              opacity: 1
+            }
+          },
+          credit: {
+            text: "via GIPHY",
+            url: "https://giphy.com/gifs/TvLuZ00OIADoQ"
+          }
+        },
+        {
+          loaderData: {
+            cssStyle: {
+              justifyContent: "flex-end"
+            },
+            assetSrc: "https://i.giphy.com/media/l3nWhI38IWDofyDrW/giphy.webp",
+            overlayStyle: {
+              backgroundColor: "#ffffff",
+              opacity: 1
+            }
+          },
+          credit: {
+            text: "via GIPHY, Tobias Rothe, @ethor",
+            url: "https://giphy.com/gifs/thinking-l3nWhI38IWDofyDrW"
+          }
+        },
+        {
+          loaderData: {
+            assetSrc: "https://i.giphy.com/media/xTkcEQACH24SMPxIQg/giphy.webp",
+            overlayStyle: {
+              backgroundColor: "#161618",
+              opacity: 1
+            }
+          },
+          credit: {
+            text: "via GIPHY, Make it Move, @makeitmove",
+            url: "https://giphy.com/gifs/hand-bored-waiting-xTkcEQACH24SMPxIQg"
+          },
+          darkBackground: true
+        },
+        {
+          loaderData: {
+            assetSrc: "https://i.giphy.com/media/jAYUbVXgESSti/giphy.webp",
+            overlayStyle: {
+              backgroundColor: "#ecf0ef",
+              opacity: 1
+            }
+          },
+          credit: {
+            text: "via GIPHY",
+            url: "https://giphy.com/gifs/google-icon-loading-jAYUbVXgESSti"
+          }
+        },
+        {
+          loaderData: {
+            assetSrc: "//i.imgur.com/FEDTpyE.gif",
+            overlayStyle: {
+              backgroundColor: "black",
+              opacity: 1
+            }
+          },
+          credit: {
+            text: "via GIPHY",
+            url: "https://giphy.com/gifs/VseXvvxwowwCc"
+          },
+          darkBackground: true
+        },
+        {
+          loaderData: {
+            assetSrc: "https://i.giphy.com/media/4T1NFafropdQOrBYw6/giphy.webp",
+            overlayStyle: {
+              background: "linear-gradient(to top, #6c87a7, #4262a8)",
+              opacity: 1
+            }
+          },
+          credit: {
+            text: "via GIPHY, Rodney Dangerfield, @rodneydangerfield",
+            url: "https://giphy.com/gifs/rodneydangerfield-loop-flip-diving-4T1NFafropdQOrBYw6"
           },
         },
         {
           loaderData: {
-            component: Flat,
+            assetSrc: "https://i.giphy.com/media/sM503VtpDzxLy/giphy.webp",
             overlayStyle: {
-              backgroundColor: '#ECF0F1',
+              background: "#44defe",
+              opacity: 1
             },
           },
-          componentSource: FlatContent,
           credit: {
-            text: 'Codrin Pavel',
-            url: 'https://codepen.io/zerospree/pen/aCjAz?editors=1100',
+            text: "via GIPHY",
+            url: "https://giphy.com/gifs/sM503VtpDzxLy"
           },
         },
         {
           loaderData: {
-            component: Hexagon,
-            overlayStyle: {
-              backgroundColor: '#ECF0F1',
-            },
+            assetSrc: "https://media.giphy.com/media/isodBFMr9EJ7G/giphy.gif",
+            text: `Loading...`,
+            textStyle: {
+              color: 'white'
+            }
           },
-          componentSource: HexagonContent,
           credit: {
-            text: 'Roland Lösslein',
-            url: 'https://codepen.io/weaintplastic/pen/qEMZbx',
+            text: "via GIPHY",
+            url: "https://giphy.com/gifs/frozen-bit-loading-isodBFMr9EJ7G"
           },
+          darkBackground: true
         },
         {
           loaderData: {
-            component: Plug,
+            assetSrc: "https://i.giphy.com/media/MTKsRM3QzNeOI59SbO/giphy.webp",
             overlayStyle: {
-              backgroundColor: '#f05a30',
+              background: "black",
+              opacity: 1
             },
           },
-          componentSource: PlugContent,
           credit: {
-            text: 'Anastasiya Kuligina',
-            url: 'https://codepen.io/WebSonata/pen/bRaONB',
+            text: "via GIPHY",
+            url: "https://giphy.com/gifs/loop-happiness-loading-MTKsRM3QzNeOI59SbO"
           },
+          darkBackground: true
         },
+        {
+          loaderData: {
+            text: 'Only text preloader.',
+            textStyle: {
+              textAlign: 'center',
+              color: 'white',
+              fontSize: '16px'
+            }
+          },
+          darkBackground: true
+        },
+        {
+          loaderData: {
+            cssStyle: {
+              textAlign: 'center'
+            },
+            html: `
+            <p style="color: white; margin-bottom: 10px">
+              Even the sky is not the limit with vue-preloaders.
+            </p>
+            <div style="background: pink; padding: 5px">
+              I'm an injected HTML, <br>
+              check source
+            </div>
+            `,
+          },
+        }
       ];
-    },
+
+      return cards.map(card => this.getCardWithType(card));
+    }
   },
+  methods: {
+    getCardWithType(card) {
+      const cardTypes = [];
+      const { component, assetSrc, text, html } = card.loaderData;
+      if (component) cardTypes.push(types.component);
+      if (assetSrc) cardTypes.push(types.asset);
+      if (text) cardTypes.push(types.text);
+      if (html) cardTypes.push(types.html);
+
+      return {
+        ...card,
+        types: cardTypes.join(", ")
+      };
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+$card-gap: $spacing-2;
+
+#app {
+  overflow: hidden;
+}
 .cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin: -$card-gap;
 }
 .card {
   max-width: 250px;
+  margin: $card-gap;
 }
 </style>

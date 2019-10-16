@@ -24,7 +24,7 @@
             </div>
             <SourceContent
               class="source"
-              v-for="(code, index) in [loaderSource, componentSource]"
+              v-for="(code, index) in [loaderSource, componentSource].filter(source => source)"
               :key="index"
               :code="code"
             />
@@ -71,11 +71,12 @@ export default {
       this.openerElement = openerElement;
       this.componentSource = componentSource;
       this.loaderSource = { ...loader };
+      if(this.loaderSource.html) this.loaderSource.html = JSON.stringify(this.loaderSource.html, null, 0);
       if (this.loaderSource.component) this.loaderSource.component = this.loaderSource.component.name;
       this.loaderSource = JSON.stringify(this.loaderSource, null, 2);
       this.credit = credit;
 
-      this.$el.scroll(0, 0);
+      this.$el.scrollTop = 0;
 
       this.$nextTick(() => {
         this.goToOpener();
@@ -160,6 +161,7 @@ export default {
 }
 .cross {
   height: $icon-size;
+  width: $icon-size;
 }
 
 .content {
