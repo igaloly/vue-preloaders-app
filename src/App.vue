@@ -284,7 +284,7 @@ export default {
             cssStyle: {
               textAlign: 'center',
             },
-            html: `<div style="padding: 10px;"><p style="color: white; margin-bottom: 10px">Even the sky is not the limit with vue-preloaders.</p><div style="background: pink; padding: 5px">I'm an injected HTML, <br>check source</div></div>`,
+            html: '<div style="padding: 10px;"><p style="color: white; margin-bottom: 10px">Even the sky is not the limit with vue-preloaders.</p><div style="background: pink; padding: 5px">I\'m an injected HTML, <br>check source</div></div>',
           },
           darkBackground: true,
         },

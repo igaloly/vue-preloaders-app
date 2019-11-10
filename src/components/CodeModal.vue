@@ -72,7 +72,7 @@ export default {
       this.componentSource = componentSource;
       this.loaderSource = { ...loader };
       if (this.loaderSource.component) this.loaderSource.component = this.loaderSource.component.name;
-      this.loaderSource = JSON.stringify(this.loaderSource, null, 2)
+      this.loaderSource = JSON.stringify(this.loaderSource, null, 2);
       this.credit = credit;
 
       this.$el.scrollTop = 0;
