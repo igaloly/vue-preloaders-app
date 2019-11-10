@@ -6,7 +6,7 @@
         <Copy class="copy" />
       </button>
     </div>
-    <pre class="code">{{code}}</pre>
+    <div class="code">{{code}}</div>
   </div>
 </template>
 

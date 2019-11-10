@@ -307,6 +307,10 @@ $width: calc(100% - #{$left});
   height: 100%;
   display: flex;
 }
+.loader-space-saver-wrapper {
+  display: flex;
+  align-items: center;
+}
 .loader-button,
 .loader-space-saver {
   display: block;
