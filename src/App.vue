@@ -126,22 +126,22 @@ export default {
             .default,
           darkBackground: true,
         },
-        {
-          loaderData: {
-            component: require('./components/preloaders/Danger').default,
-            overlayStyle: {
-              backgroundColor: '#090707',
-              opacity: 1,
-            },
-          },
-          credit: {
-            text: 'James Panter',
-            url: 'https://codepen.io/jpanter/pen/PWWQXK',
-          },
-          componentSource: require('!!raw-loader!./components/preloaders/Danger')
-            .default,
-          darkBackground: true,
-        },
+        // {
+        //   loaderData: {
+        //     component: require('./components/preloaders/Danger').default,
+        //     overlayStyle: {
+        //       backgroundColor: '#090707',
+        //       opacity: 1,
+        //     },
+        //   },
+        //   credit: {
+        //     text: 'James Panter',
+        //     url: 'https://codepen.io/jpanter/pen/PWWQXK',
+        //   },
+        //   componentSource: require('!!raw-loader!./components/preloaders/Danger')
+        //     .default,
+        //   darkBackground: true,
+        // },
         {
           loaderData: {
             assetSrc: 'https://i.giphy.com/media/TvLuZ00OIADoQ/giphy.webp',
@@ -239,20 +239,20 @@ export default {
             url: 'https://giphy.com/gifs/sM503VtpDzxLy',
           },
         },
-        // {
-        //   loaderData: {
-        //     assetSrc: 'https://media.giphy.com/media/isodBFMr9EJ7G/giphy.gif',
-        //     text: 'Loading...',
-        //     textStyle: {
-        //       color: 'white',
-        //     },
-        //   },
-        //   credit: {
-        //     text: 'via GIPHY',
-        //     url: 'https://giphy.com/gifs/frozen-bit-loading-isodBFMr9EJ7G',
-        //   },
-        //   darkBackground: true,
-        // },
+        {
+          loaderData: {
+            assetSrc: 'https://media.giphy.com/media/isodBFMr9EJ7G/giphy.gif',
+            text: 'Loading...',
+            textStyle: {
+              color: 'white',
+            },
+          },
+          credit: {
+            text: 'via GIPHY',
+            url: 'https://giphy.com/gifs/frozen-bit-loading-isodBFMr9EJ7G',
+          },
+          darkBackground: true,
+        },
         {
           loaderData: {
             assetSrc: 'https://i.giphy.com/media/MTKsRM3QzNeOI59SbO/giphy.webp',

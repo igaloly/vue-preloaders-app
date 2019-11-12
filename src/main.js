@@ -1,9 +1,7 @@
 import Vue from 'vue';
 // preloaders plugin
-import Preloaders from '../node_modules/vue-preloaders/dist/vue-plugin';
+import VuePreloaders from 'vue-preloaders';
 import App from './App.vue';
-// import colors
-
 
 // import global css
 import './styles/main.scss';
@@ -11,7 +9,7 @@ import './styles/main.scss';
 Vue.config.productionTip = false;
 
 // preloaders plugin initialization
-Vue.use(Preloaders);
+Vue.use(VuePreloaders);
 
 new Vue({
   render: h => h(App),
