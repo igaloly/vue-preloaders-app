@@ -349,7 +349,4 @@ $width: calc(100% - #{$left});
     pointer-events: auto;
   }
 }
-
-@include breakpoint-desktop {
-}
 </style>

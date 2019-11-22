@@ -6,3 +6,16 @@ body {
   overflow: auto;
   overflow: initial;
 }
+
+input, select {
+  border-bottom: solid 1px color(beta);
+  &::placeholder {
+    color: color(gamma);
+  }
+}
+
+button[type="submit"] {
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: color(beta);
+}

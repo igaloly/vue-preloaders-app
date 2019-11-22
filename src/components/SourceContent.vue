@@ -11,20 +11,20 @@
 </template>
 
 <script>
-import Copy from './icons/Copy.vue';
+import Copy from "./icons/Copy.vue";
 
 export default {
-  name: 'SourceContent',
+  name: "SourceContent",
   props: {
     code: {
       type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   components: { Copy },
   data() {
     return {
-      isCopied: false,
+      isCopied: false
     };
   },
   methods: {
@@ -38,11 +38,11 @@ export default {
       if (navigator.clipboard) {
         navigator.clipboard.writeText(this.code).then(this.toggleCopyLabel);
       } else {
-        window.clipboardData.setData('Text', this.code);
+        window.clipboardData.setData("Text", this.code);
         this.toggleCopyLabel();
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -54,6 +54,7 @@ export default {
   border-radius: 5px;
   font-size: $font-2;
   padding: $spacing-3;
+  pointer-events: none;
 }
 .copy-wrapper {
   position: absolute;
@@ -61,6 +62,9 @@ export default {
   right: 0;
   display: flex;
   align-items: center;
+}
+.button {
+  pointer-events: all;
 }
 
 .code {
