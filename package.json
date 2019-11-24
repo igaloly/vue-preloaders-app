@@ -1,5 +1,21 @@
 {
-  "name": "preloaders-app",
+  "name": "vue-preloaders-app",
+  "description": "Vue-preloaders home page. use-cases and showcase.",
+  "keywords": [
+    "vue-preloaders",
+    "vue",
+    "nuxt",
+    "loader",
+    "preloader",
+    "spinner"
+  ],
+  "author": "Igal Leikin <igaloly@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/igaloly/vue-preloaders-app"
+  },
+  "homepage": "https://vue-preloaders.netlify.com/",
   "version": "0.1.0",
   "private": true,
   "scripts": {
