@@ -1,5 +1,21 @@
 {
-  "name": "preloaders-app",
+  "name": "vue-preloaders-app",
+  "description": "Vue-preloaders home page. use-cases and showcase.",
+  "keywords": [
+    "vue-preloaders",
+    "vue",
+    "nuxt",
+    "loader",
+    "preloader",
+    "spinner"
+  ],
+  "author": "Igal Leikin <igaloly@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/igaloly/vue-preloaders-app"
+  },
+  "homepage": "https://vue-preloaders.netlify.com/",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,7 +28,8 @@
     "@babel/polyfill": "^7.6.0",
     "core-js": "^2.6.5",
     "vue": "^2.6.10",
-    "vue-preloaders": "^1.0.2"
+    "vue-meta": "^2.3.1",
+    "vue-preloaders": "^1.0.7"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",
