@@ -48,11 +48,11 @@ export default {
       userData: { ...userData },
       credit: [
         {
-          text: "A is for Ai",
+          text: "via GIPHY, A is for Ai",
           url: "https://giphy.com/gifs/ai-mail-aisforai-iE3aMP0PRaeHOJAA5r"
         },
         {
-          text: "TaylorAnneDraws",
+          text: "via GIPHY, TaylorAnneDraws",
           url: "https://giphy.com/gifs/funny-art-cute-3o6vXURvyF7bmW1HGg"
         }
       ]

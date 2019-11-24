@@ -106,7 +106,7 @@ export default {
             }
           },
           credit: {
-            text: "GlitchWorker",
+            text: "GlitchWorker - Codepen",
             url: "https://codepen.io/glitchworker/pen/mVgogz"
           },
           componentSource: require("!!raw-loader!./components/preloaders/Slack")
@@ -120,7 +120,7 @@ export default {
             }
           },
           credit: {
-            text: "Roland Lösslein",
+            text: "Roland Lösslein - Codepen",
             url: "https://codepen.io/weaintplastic/pen/qEMZbx"
           },
           componentSource: require("!!raw-loader!./components/preloaders/Hexagon")
@@ -136,7 +136,7 @@ export default {
             }
           },
           credit: {
-            text: "Martin van Driel",
+            text: "Martin van Driel - Codepen",
             url: "https://codepen.io/martinvd/pen/xbQJom"
           },
           componentSource: require("!!raw-loader!./components/preloaders/Infinite")
@@ -152,7 +152,7 @@ export default {
             }
           },
           credit: {
-            text: "Jack Rugile",
+            text: "Jack Rugile - Codepen",
             url: "https://codepen.io/jackrugile/pen/JddmaX"
           },
           componentSource: require("!!raw-loader!./components/preloaders/Rainbow")
@@ -168,7 +168,7 @@ export default {
             }
           },
           credit: {
-            text: "Tashfeen",
+            text: "Tashfeen - Codepen",
             url: "https://codepen.io/tashfene/pen/raEqrJ"
           },
           componentSource: require("!!raw-loader!./components/preloaders/SquareFill")
